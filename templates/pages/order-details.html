@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} - Order Details {% endblock %}
+
+{% block content %}
+<div class="all-page-title page-breadcrumb">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Order {{ order.id }}</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid p-5">
+    <div class="row">
+
+        <div class="col-lg-12">
+
+            <div class="text-left mb-3">
+
+                <div class="row">
+                    <div class=" col-12 col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h1 class="card-title">Ordered Items</h1>
+                                <div class="row cart-row">
+                                    <div class="col-lg-3" style="flex: 2; font-size: 18px;"><strong>Food Item</strong></div>
+                                    <div class="col-lg-3" style="flex: 2; font-size: 18px;"><strong>Unit Price</strong></div>
+                                    <div class="col-lg-3" style="flex: 2; font-size: 18px;"><strong>Quantity</strong></div>
+                                    <div class="col-lg-3" style="flex: 2; font-size: 18px;"><strong>Total Price</strong></div>
+                                </div>
+                                <hr />
+                                {% for item in order_items %}
+                                <div class="row cart-row my-3">
+                                    <div class="col-lg-3" style="flex: 2">
+                                        <h4><b><a href="{% url 'details' item.food.slug %}">
+                                                    {{ item.food.name }}
+                                                </a></b></h4>
+                                    </div>
+                                    <div class="col-lg-3" style="flex: 2">
+                                        <h4>{{ item.food.price }} BDT</h4>
+                                    </div>
+                                    <div class="col-lg-3 align-items-center" style="flex: 2">
+                                        <div class="">
+                                            <span class="quantity"><b>{{ item.quantity }}</b></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3" style="flex: 2">
+                                        <h4>{{ item.get_total }} BDT</h4>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                
+                                <hr />
+                                <h2 class="my-3">Total Amount: <b>{{ grand_total }} BDT</b></h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-12 col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h1 class="card-title">Order Details</h1>
+                                <h3 class="card-text">
+                                    <strong>Order Date:</strong> {{ order.date_ordered }}<br><br>
+                                    <strong>Order Status:</strong> {{ order.status }}<br><br>
+                                    <strong>Order Total:</strong> {{ order.total_price }}<br><br>
+                                    <strong>Grand Total:</strong> {{ grand_total }}
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+{% include 'components/contact-tile.html' %}
+
+{% endblock %}

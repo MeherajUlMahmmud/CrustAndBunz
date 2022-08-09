@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} - Confirm Order{% endblock %}
+
+{% block content %}
+
+<!-- Start All Pages -->
+<div class="all-page-title page-breadcrumb">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Confirm Order</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End All Pages -->
+
+<div class="container p-5">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="text-center">
+                        <img src="{% static 'assets/images/green-tick-icon.png' %}"
+                             style="height: 150px; width: 150px"/>
+                        <p style="font-size: 35px">Thank You for Your Order</p>
+                        <p style="font-size: 30px">Order Number: {{ order.id }}</p>
+                        <p style="font-size: 20px">You will receive an email confirmation shortly.</p>
+                        <p class="m-4" style="font-size: 20px">View
+                            <a href="{% url 'order-details' order.id %}">Order Details</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include 'components/contact-tile.html' %}
+
+{% endblock %}

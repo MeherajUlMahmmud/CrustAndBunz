@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+{% include 'components/carousel.html' %}
+
+<div class="about-section-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+                <!-- <video width="100%" loop="true" autoplay="autoplay" controls muted>
+                    <source src="{% static 'assets/videos/promo.mp4' %}" type="video/mp4">
+                    <source src="{% static 'assets/video/promo.ogg' %}" type="video/ogg">
+                </video> -->
+            </div>
+
+            <div class="text-center col-lg-6 col-md-6 col-sm-12">
+                <div class="inner-column">
+                    <h1>Welcome To <span>Crust & Bunz</span></h1>
+                    <h4><b>Little Story</b></h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque auctor suscipit feugiat. Ut
+                        at pellentesque ante, sed convallis arcu. Nullam facilisis, eros in eleifend luctus, odio ante
+                        sodales augue, eget lacinia lectus erat et sem. </p>
+                    <p>Sed semper orci sit amet porta placerat. Etiam quis finibus eros. Sed aliquam metus lorem, a
+                        pellentesque tellus pretium a. Nulla placerat elit in justo vestibulum, et maximus sem
+                        pulvinar.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Start QT -->
+<div class="qt-box qt-background">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 ml-auto mr-auto text-left">
+                <p class="lead ">
+                    " If you're not the one cooking, stay out of the way and compliment the chef. "
+                </p>
+                <span class="lead">Michael Strahan</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End QT -->
+
+{% include 'components/contact-tile.html' %}
+
+{% endblock %}

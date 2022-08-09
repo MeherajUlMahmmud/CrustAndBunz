@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} - {{ request.user.name }} {% endblock %}
+
+{% block content %}
+<div class="all-page-title page-breadcrumb">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>{{ request.user.name }}</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class=" row">
+        <div class="col-md-4">
+
+            <div class="card mb-3">
+
+                {% if profile.image %}
+                <img alt="{{ user.name }}" class="card-img-top" src="{{ profile.image.url }}" height="350px">
+
+                {% else %}
+                <img alt="{{ user.name }}" class="card-img-top"
+                    src="{% static 'assets/images/placeholders/user-placeholder.jpg' %}" height="350px">
+                {% endif %}
+                <div class="card-body">
+                    <h2 class="card-title text-center">{{ user.name }}</h2>
+                    {% if is_self %}
+                    <a class="btn btn-common btn-block" href="{% url 'edit-profile' user.slug %}">
+                        <i class="fas fa-pencil-alt mx-3"></i>Update Profile
+                    </a>
+                    {% endif %}
+                </div>
+                <div class="card-footer" style="text-align: center">
+                    Member Since {{ user.date_joined.date}}
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-8">
+
+            <div class="card text-left mb-3">
+                <div class="card-header">
+                    <p class="h3">General Information</p>
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="">
+                                <div class="card-body">
+                                    <h3>Email: <a href="mailto:{{ user.email }}">
+                                            <b>{{ user.email }}</b>
+                                        </a></h3>
+                                    {% if profile.phone %}
+                                    <h3>Mobile: <a href="tel:{{ profile.phone }}">
+                                            <b>{{ profile.phone }}</b>
+                                        </a>
+                                    </h3>
+
+                                    {% else %}
+                                    <h3>Mobile:
+                                        <a class="btn " href="{% url 'edit-profile' request.user.slug %}">
+                                            <i class="fas fa-pencil-alt"></i>Add Mobile Number
+                                        </a>
+                                    </h3>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class=" w-40">
+                                <div class="card-body">
+                                    {% if profile.address %}
+                                    <h3>Address:
+                                        <a href="http://maps.google.co.in/maps?q={{ profile.address }}" target="_blank">
+                                            <b>{{ profile.address }}</b>
+                                        </a>
+                                    </h3>
+
+                                    {% else %}
+                                    <h3>Address:
+                                        <a class="btn " href="{% url 'edit-profile' request.user.slug %}">
+                                            <i class="fas fa-pencil-alt"></i>Add Address
+                                        </a>
+                                    </h3>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+
+            <!-- Tabs navs -->
+            <ul class="nav nav-tabs mb-3" id="ex1" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="ex1-tab-1" data-mdb-toggle="tab" href="#ex1-tabs-1" role="tab"
+                        aria-controls="ex1-tabs-1" aria-selected="true">
+                        Your Orders
+                    </a>
+                </li>
+
+            </ul>
+            <!-- Tabs navs -->
+
+            <!-- Tabs content -->
+            <div class="tab-content" id="ex1-content">
+
+                <div class="tab-pane fade show active" id="ex1-tabs-1" role="tabpanel" aria-labelledby="ex1-tab-1">
+                    {% if orders %}
+                    {% for order in orders %}
+                    <div class="card text-left mb-3">
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p><b>Order Total: </b>{{ order.total_price }}</p>
+
+                                    <p><b>Payment Method: </b>{{ order.payment_method }}</p>
+
+                                    {% if order.transaction_id %}
+                                    <p><strong>Transaction ID: </strong>{{ order.transaction_id }}</p>
+                                    {% endif %}
+                                </div>
+
+                                <div class="col-md-6 align-self-center">
+                                    <p><strong>Phone Number: </strong>{{ order.phone }}</p>
+
+                                    <p><strong>Delivery Address: </strong>
+                                        <a href="http://maps.google.co.in/maps?q={{ order.shipping_address }}"
+                                            target="_blank">
+                                            {{ order.shipping_address }}</a>
+                                    </p>
+
+                                    {% if order.is_pending %}
+                                    <p><strong>Order Status: </strong>PENDING</p>
+                                    {% elif order.is_confirmed %}
+                                    <p><strong>Order Status: </strong>CONFIRMED</p>
+                                    {% elif order.is_cooking %}
+                                    <p><strong>Order Status: </strong>COOKING 🔥</p>
+                                    {% elif order.is_onTheWay %}
+                                    <p><strong>Order Status: </strong>ON THE WAY</p>
+                                    {% elif order.is_delivered %}
+                                    <p><strong>Order Status: </strong>DELIVERED</p>
+                                    {% endif %}
+                                    <a class="btn btn-common rounded" 
+                                    href="{% url 'order-details' order.id %}">
+                                        See Details <i class="fa fa-arrow-right ms-2"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-footer text-muted">
+                            Ordered on <b>{{ order.date_ordered }}</b>
+                        </div>
+
+                    </div>
+                    <hr />
+                    {% endfor%}
+
+                    {% else %}
+                    You haven't made any orders Yet.
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

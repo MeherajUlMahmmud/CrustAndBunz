@@ -1,0 +1,50 @@
+{% load static %}
+<footer class="footer-area bg-f">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 mb-3">
+                <h3>About Us</h3>
+                <p>Crust & Bunz is a cloud kitchen which serves Pizza, Pasta, Burger & Sub only in Dhaka City.<br/>
+                    We are committed to provide tasty, hygienic and unique items.Crust & Bunz never compromises with
+                    the quality and taste.</p>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3">
+                <h3>Social</h3>
+                <ul class="list-inline f-social">
+                    <li class="list-inline-item"><a href="https://www.facebook.com/crustandbunzbd" target="_blank">
+                        <i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li class="list-inline-item"><a href="https://www.facebook.com/crustandbunzbd" target="_blank">
+                        <i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                    <li class="list-inline-item"><a href="https://www.facebook.com/crustandbunzbd" target="_blank">
+                        <i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                </ul>
+                <a href="{% url 'contact' %}" style="font-size: 20px; color: white;">Send Us a Message</a>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3">
+                <h3>Contact Information</h3>
+                <p class="lead">Dhaka, Bangladesh</p>
+                <p class="lead"><a href="tel:01713-334680">+880 1713 334680</a></p>
+                <p class="lead"><a href="mailto:info@admin.com">crustnbunz@gmail.com</a></p>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3">
+                <a href="{% url 'download-menu' %}" target="_blank">
+                    <h3>Download our menu</h3>
+                </a>
+                <a href="{% url 'download-menu' %}" target="_blank" style="color: white;">Download</a>
+                <img src="{% static 'assets/images/logo.png' %}" style="width: 280px; height: 180px;"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <p class="company-name">All Rights Reserved. &copy; 2021 Crust & Bunz</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</footer>

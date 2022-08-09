@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %} - Sign Up{% endblock %}
+
+{% block content %}
+
+<div class="contact-box">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="heading-title text-center">
+                    <h2>Be a Member</h2>
+                    <p>Create a New Account</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class=" col-md-12" style="margin: 50px auto;">
+                <form method="post">
+                    {% csrf_token %}
+
+                    <div class="row">
+                        <div class=" col-md-12">
+                            <div class="form-group">
+                                {{ form.name|add_class:"form-control"|attr:"autofocus" }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class=" col-md-12">
+                            <div class="form-group">
+                                {{ form.email|add_class:"form-control" }}
+                                {{ form.email.errors }}
+                                {{ form.email.help_text|safe }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class=" col-md-12">
+                            <div class="form-group">
+                                {{ form.password1|add_class:"form-control" }}
+                                {{ form.password1.errors|add_class:"help-block with-errors" }}
+                                {{ form.password1.help_text|safe }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class=" col-md-12">
+                            <div class="form-group">
+                                {{ form.password2|add_class:"form-control" }}
+                                {{ form.password2.errors|add_class:"help-block with-errors" }}
+                                {{ form.password2.help_text|safe }}
+                            </div>
+                        </div>
+                    </div>
+                    {% if form.non_field_errors %}
+                    <div class="row">
+                        <div class=" col-md-12">
+                            <ul class='form-errors list-group mb-3'>
+                                {% for error in form.non_field_errors %}
+                                <li class="small list-group-item list-group-item-danger">{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div>
+                        <input class="agree-term" id="agree-term" name="check" type="checkbox" required/>
+                        <span>
+                            I agree to all statements in <a href="{% url 'terms' %}">Terms of service</a>
+                            and <a href="{% url 'privacy' %}">Privacy Policy</a>
+                            </span>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="text-center col-md-12 ">
+                            <div class="submit-button">
+                                <button class="btn btn-common" id="submit" type="submit">Sign Up</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

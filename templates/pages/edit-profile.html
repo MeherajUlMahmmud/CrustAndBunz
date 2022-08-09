@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %} - Edit profile{% endblock %}
+
+{% block content %}
+<div class="all-page-title page-breadcrumb">
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Edit Profile</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid p-5">
+    <div class="row">
+
+        <div class="col-12 col-sm-6 col-md-5 col-lg-4 col-xl-3">
+
+            <div class="card mb-3">
+                {% if profile.image %}
+                <img alt="{{ user.name }}"
+                     class="card-img-top"
+                     src="{{profile.image.url}}"
+                        height="250px">
+                {% else %}
+                <img alt="{{ user.name }}"
+                     class="card-img-top"
+                     src="{% static 'assets/images/placeholders/user-placeholder.jpg' %}"
+                     height="250px">
+                {% endif %}
+                <div class="card-body">
+                    <h2 class="card-title text-center">{{ user.name }}</h2>
+                </div>
+                <div class="card-footer text-muted" style="text-align: center">
+                    Member Since {{ user.date_joined.date}}
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="col-12 col-sm-12 col-md-7 col-lg-8 col-xl-9">
+
+            <div class="card text-left mb-3">
+                <div class="card-header">
+                    <h2 class="card-title text-center">Edit Profile</h2>
+                </div>
+                <form action="" class="p-4 p-md-5 border rounded" enctype="multipart/form-data" method="post">
+
+                    {% csrf_token %}
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+
+                                <div class="row">
+                                    <div class="col-lg-12 col-sm-6">
+
+                                        <div class="form-group">
+                                            <label class="col-form-label">Phone Number</label>
+                                            {{ form.phone|add_class:"form-control" }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12 ">
+
+                                        <div class="form-group">
+                                            <label class="col-form-label">Address</label>
+                                            {{ form.address|add_class:"form-control" }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12 col-md-12">
+                                        <div class="form-group">
+                                            <label>Click here to update photo</label>
+                                            {{ form.image|add_class:"form-control" }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-12">
+                        <button class="btn btn-block btn-common btn-md" type="submit">Update Profile</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}
