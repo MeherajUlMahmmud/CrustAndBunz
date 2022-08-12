@@ -183,7 +183,7 @@ def proceed_order(request):  # Proceed Order Page
             order.user = request.user  # Set the user
             order.save()  # Save the order
             cartItemToOrderItem(order, cart_items)  # Save the cart items to the order items
-            sendOrderConfirmationMail(user, order, cart_items)  # Send the order confirmation mail
+            # sendOrderConfirmationMail(user, order, cart_items)  # Send the order confirmation mail
             return redirect('confirm-order', order.id)  # Redirect to the confirm order page
 
     context = {  # Context for the proceed order page

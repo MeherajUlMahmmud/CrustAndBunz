@@ -211,7 +211,7 @@ def place_order(request):
         shipping_address=address)
     
     cartItemToOrderItem(order, cart_items)  # Save the cart items to the order items
-    sendOrderConfirmationMail(user, order, cart_items)  # Send the order confirmation mail
+    # sendOrderConfirmationMail(user, order, cart_items)  # Send the order confirmation mail
     serialized_data = OrderModelSerializer(order, many=False).data
     return Response(serialized_data, status=HTTP_200_OK)
     # except:
