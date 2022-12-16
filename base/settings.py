@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'whitenoise.runserver_nostatic',
 ]
 
 AUTH_USER_MODEL = 'web_app.UserModel'
@@ -85,12 +86,8 @@ WSGI_APPLICATION = 'base.wsgi.application'
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "d5btf16os721cu",
-        "HOST": "ec2-34-193-44-192.compute-1.amazonaws.com",
-        "PORT": 5432,
-        "USER": "zufbhtrdzscfye",
-        "PASSWORD": "9b1564e943c027e0b41d5eb22757ebeb382f939760ba243b89960f8ee20fb632",
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
     }
 }
 
@@ -135,6 +132,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static-root")
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static-files"),
 ]
+STATICFILES_STORAGE="whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL = '/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
